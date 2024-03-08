@@ -7,8 +7,7 @@ const hashSecret = process.env.JWTSECRETKEY;
 
 export const authMiddleware = async (req, res, next) => {
   try {
-    const token = req.cookies?.accessToken;
-    console.log(req.cookies);
+    const token = req.cookies.accessToken;
     if (token) {
       const decodedData = jwt.verify(token, hashSecret);
       req.user = decodedData;
