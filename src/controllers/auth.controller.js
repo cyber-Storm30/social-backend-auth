@@ -9,25 +9,20 @@ class AuthController {
     try {
       const { email, password } = req.body;
       const user = await AuthService.login(email, password);
-      const accessToken = jwt.sign(
-        {
-          email: user.email,
-          id: user._id,
-        },
-        process.env.JWTSECRETKEY,
-        { expiresIn: "10h" }
-      );
+      // const accessToken = jwt.sign(
+      //   {
+      //     email: user.email,
+      //     id: user._id,
+      //   },
+      //   process.env.JWTSECRETKEY,
+      //   { expiresIn: "10h" }
+      // );
       if (user) {
-        res
-          .status(200)
-          .cookie("accessToken", accessToken, {
-            httpOnly: true,
-          })
-          .json({
-            success: true,
-            data: user,
-            message: "Login Succesfull",
-          });
+        res.status(200).json({
+          success: true,
+          data: user,
+          message: "Login Succesfull",
+        });
       }
     } catch (err) {
       res.status(500).json({ message: err.message });
@@ -38,26 +33,20 @@ class AuthController {
     try {
       const { email, password, username, image } = req.body;
       const user = await AuthService.signup(email, password, username, image);
-      const accessToken = jwt.sign(
-        {
-          email: user.email,
-          id: user._id,
-        },
-        process.env.JWTSECRETKEY,
-        { expiresIn: "10h" }
-      );
+      // const accessToken = jwt.sign(
+      //   {
+      //     email: user.email,
+      //     id: user._id,
+      //   },
+      //   process.env.JWTSECRETKEY,
+      //   { expiresIn: "10h" }
+      // );
       if (user) {
-        res
-          .status(200)
-          .cookie("accessToken", accessToken, {
-            httpOnly: true,
-            sameSite: "lax",
-          })
-          .json({
-            success: true,
-            data: user,
-            message: "Signup Succesfull",
-          });
+        res.status(200).json({
+          success: true,
+          data: user,
+          message: "Signup Succesfull",
+        });
       }
     } catch (err) {
       res.status(500).json({ message: err.message });
