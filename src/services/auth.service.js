@@ -18,6 +18,7 @@ class AuthService {
       throw err;
     }
   }
+
   async signup(email, userPassword, username, image) {
     try {
       const user = await UserModel.findOne({ email });
@@ -39,8 +40,8 @@ class AuthService {
       throw err;
     }
   }
+
   async getUserDetails(id) {
-    console.log("id", id);
     try {
       const userDetails = await UserModel.findById(id);
       if (!userDetails) {
@@ -108,6 +109,7 @@ class AuthService {
       throw err;
     }
   }
+
   async getPeopleYouMayKnow(userId) {
     try {
       const user = await UserModel.findById(userId).select(
